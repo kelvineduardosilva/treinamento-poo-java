@@ -62,48 +62,46 @@ public class ProgramContaBancaria {
 			}
 
 		}
-		ContaBancaria contabancaria = new ContaBancaria(numero, nome, saldo);
+		ContaBancaria contabancaria;
+		if(saldo > 0.00) {
+		     contabancaria = new ContaBancaria(numero, nome, saldo);
+		}
+		else {
+			 contabancaria = new ContaBancaria(numero, nome);
+		}
+		/*dessa forma eu crio a variavel do objeto fora do if else e atribuo um valor a ele dentro do if else. Caso eu nao fizesse
+		 * isso eu nao conseguiria usar o objeto por conta do escopo do if else que não deixaria*/
+		
+		
+		/*aqui eu preciso de um if else a parte só pra ver qual objeto criar pq o java nao aceita o if else que esta no while,
+		 * pelo fato dele nao levar em consideração a lógica que faz que o while rode pelo menos uma vez, criando um objeto. en
+		 * tao por nao confiar que o while vai rodar, ele recusa a deixar. Portanto criei um if else só pra isso. */
+		
 		System.out.println("Dados da conta: ");
-		listarDados(contabancaria);
+		System.out.println(contabancaria.toString());
 
 		System.out.println("Digite o valor a ser depositado: ");
 		saldoAtualizado = entrada.nextInt();
-		saldo += saldoAtualizado;
-		contabancaria.setSaldoConta(saldo);
+		saldo = saldoAtualizado;
+		contabancaria.deposito(saldo);
 
 		System.out.println("Dados atualizados: ");
 
-		listarDados(contabancaria);
+		System.out.println(contabancaria.toString());
 
 		System.out.println("Digite o valor a ser sacado(Cobramos R$5 de taxa!): ");
 		saque = entrada.nextDouble();
-		saldo -= saque + 5;
-		contabancaria.setSaldoConta(saldo);
+		
+		contabancaria.saque(saque);
 
 		System.out.println("Saque bem sucedido! dados: ");
-		listarDados(contabancaria);
+		System.out.println(contabancaria.toString());
+		
+		
+		
+		entrada.close();
 
 	}
 
-	public static void listarDados(ContaBancaria conta) {
-
-		System.out.println("Número da conta: " + conta.getNumeroConta());
-		System.out.println("Nome: " + conta.getNomeConta());
-		System.out.printf("Saldo: %.2f%n", conta.getSaldoConta());
-		/*
-		 * aqui aconteceu uma coisa interessante. Criamos o metodo listarDados
-		 * justamente pra eu economizar tempo e deixar o codigo menor ja que vou listar
-		 * os dados varias vezes! porem, como nesse metodo eu teria que criar um objeto
-		 * da classe pra poder usar os gets, eu teria que passar parametros ao criar o
-		 * objeto pq eu coloquei um construtor na minha classe, e eu nao tenho os
-		 * valores nesse metodo pra passar como parametro, entao eu crio o metodo,
-		 * dizendo que pra ele funcionar, ele vai precisar de um valor no parametro do
-		 * tipo ContaBancaria, e esse valor vai cair dentro da variavel conta. E ai
-		 * quando for utilizar esse método na main, basta passar o objeto de
-		 * ContaBancaria como parametro! com isso, a variavel conta la no metodo, recebe
-		 * o objeto de ContaBancaria como valor, e podemos usar a variavel conta pra
-		 * acessar os gets
-		 */
-	}
 
 }
