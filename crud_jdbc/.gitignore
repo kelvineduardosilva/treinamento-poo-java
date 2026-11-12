@@ -1,0 +1,5 @@
+# Credenciais do banco de dados
+db.properties
+
+# Arquivos compilados
+bin/
